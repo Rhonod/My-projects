@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ace</title>
+
+    <!-- Icon Library -->
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+            transition: background 0.3s, color 0.3s;
+            cursor: url('https://cdn-icons-png.flaticon.com/512/32/32195.png'), auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        h1 { color: #fff; }
+
+        /* Top Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, opacity 0.3s;
+            opacity: 0.9;
+            gap: 8px;
+        }
+        .discord-btn { background: #5865F2; color: white; }
+        .github-btn { background: #333; color: white; }
+        .hire-btn { background: #ff4500; color: white; }
+
+        /* Hover Effects */
+        .btn:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Click Effect */
+        .click-effect {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: clickAnim 0.3s ease-out;
+        }
+
+        @keyframes clickAnim {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* Settings Button */
+        .settings-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .settings-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Buttons at the Top -->
+    <div class="button-container">
+        <a href="https://discord.gg/YBXR2dKFkq" class="btn discord-btn">
+            <i class="fi fi-brands-discord"></i> Discord
+        </a>
+        <a href="https://github.com/" class="btn github-btn">
+            <i class="fi fi-brands-github"></i> GitHub
+        </a>
+        <a href="hireme.html" class="btn hire-btn">
+            <i class="fi fi-sr-briefcase"></i> Hire Me
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Welcome to My Project</h1>
+        <p>I'm Ace, a bot developer and web creator. I build websites like this one and develop moderation bots.</p>
+        <p><strong>I do not create bots that break Terms of Service (TOS).</strong></p>
+        <p>Why do I do this? To improve my coding skills and grow as a developer!</p>
+
+        <div class="toggle-container">
+            <button onclick="toggleTheme()" class="btn">Toggle Dark/Light Mode</button>
+        </div>
+    </div>
+
+    <!-- Settings Button -->
+    <button class="settings-btn">
+        <i class="fi fi-rr-user-gear"></i>
+    </button>
+
+    <!-- Click Sound Effect -->
+    <audio id="click-sound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            if (body.style.backgroundColor === 'white') {
+                body.style.backgroundColor = '#000';
+                body.style.color = '#fff';
+            } else {
+                body.style.backgroundColor = 'white';
+                body.style.color = '#000';
+            }
+        }
+
+        // Cursor Click Effect & Sound
+        document.addEventListener("click", function (e) {
+            // Play Click Sound
+            let clickSound = document.getElementById("click-sound");
+            clickSound.currentTime = 0; // Reset sound
+            clickSound.play();
+
+            // Create Click Effect
+            let clickEffect = document.createElement("div");
+            clickEffect.classList.add("click-effect");
+            clickEffect.style.left = `${e.clientX}px`;
+            clickEffect.style.top = `${e.clientY}px`;
+            document.body.appendChild(clickEffect);
+
+            // Remove effect after animation
+            setTimeout(() => {
+                clickEffect.remove();
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
